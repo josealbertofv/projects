@@ -10,17 +10,25 @@ int pos = 0;
 void setup(){
   pinMode(ECHO_PIN, INPUT);
   pinMode(TRIG_PIN, OUTPUT);
+  myservo.attach(9);
   Serial.begin(9600);
 }
 void loop(){
-  Serial.println(measure());
 
-  for(pos = 0; pos <= 180; pos += 1){
+  for(pos = 0; pos <= 170; pos += 1){
     myservo.write(pos);
+    Serial.print(pos);
+    Serial.print(",");
+    Serial.print(measure());
+    Serial.print(";");
     delay(15);
   }
-  for(pos = 180; pos >= 0; pos -= 1){
+  for(pos = 170; pos >= 0; pos -= 1){
     myservo.write(pos);
+    Serial.print(pos);
+    Serial.print(",");
+    Serial.print(measure());
+    Serial.print(";");
     delay(15);
   }
 }
